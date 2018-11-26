@@ -1,5 +1,5 @@
 # ViewModelDemo
-init  使用 viewmodel  来更新 UI 数据 数据的来源是通过 UserRepository 抽象层 来获取的 数据可以是网络数据 也可以是数据库数据  
+init  初级使用 viewmodel  来更新 UI 数据 数据的来源是通过 UserRepository 抽象层 来获取的 数据可以是网络数据 也可以是数据库数据  
 
 在 viewmodel 这一层我们只管 获取数据就行了 不用关系 数据具体是怎么获取的 
 
