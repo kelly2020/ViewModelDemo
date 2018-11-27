@@ -9,9 +9,6 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -52,7 +49,7 @@ public class UserRepository {
 
 
                     webService = retrofit.create(WebService.class);
-                    executor = Executors.newFixedThreadPool(3);
+                    executor = Executors.newFixedThreadPool(5);
                 }
             }
         }
@@ -60,21 +57,12 @@ public class UserRepository {
     }
 
     public LiveData<UserData> getUser() {
-        LiveData<UserData> users = mAppDatabase.getUserDao().getUsers();
 
-        if (users.getValue() == null) {
-
-            refreshData();
-        }
-
-        LiveData<UserData> user = mAppDatabase.getUserDao().getUsers();
-
-        return user;
-
+        refreshData();
+        return mAppDatabase.getUserDao().getUsers();
     }
 
     public LiveData<List<HomeEntity>> getHomeDatas() {
-
 
         requestHomeDatas();
 
@@ -84,54 +72,84 @@ public class UserRepository {
     private void requestHomeDatas() {
         //请求服务器数据 并保存到数据库
 
-        final MutableLiveData<List<HomeEntity>> data = new MutableLiveData<>();
         final List<HomeEntity> homeEntities = new ArrayList<>();
 
-        webService.getHome().enqueue(new Callback<HomeData>() {
+
+//        webService.getHome().enqueue(new Callback<HomeData>() {
+//            @Override
+//            public void onResponse(Call<HomeData> call, final Response<HomeData> response) {
+//
+//                List<HomeData.HomeBody> bodys = response.body().getBody();
+//                for (HomeData.HomeBody homeBody : bodys) {
+//                    //通过解析服务器数据的格式 然后把对象数据存到 数据库表中对应的Java对象
+//                    HomeEntity homeEntity = new HomeEntity();
+//
+//                    homeEntity.setId(homeBody.getId());
+//                    homeEntity.setPermissionName(homeBody.getPermissionName());
+//                    homeEntity.setServiceType(homeBody.getServiceType());
+//
+//
+//                    homeEntities.add(homeEntity);
+//                }
+//
+//
+//                data.setValue(homeEntities);
+
+
+        executor.execute(new Runnable() {
             @Override
-            public void onResponse(Call<HomeData> call, final Response<HomeData> response) {
-
-                List<HomeData.HomeBody> bodys = response.body().getBody();
-                for (HomeData.HomeBody homeBody : bodys) {
-                    //通过解析服务器数据的格式 然后把对象数据存到 数据库表中对应的Java对象
-                    HomeEntity homeEntity = new HomeEntity();
-
-                    homeEntity.setId(homeBody.getId());
-                    homeEntity.setPermissionName(homeBody.getPermissionName());
-                    homeEntity.setServiceType(homeBody.getServiceType());
-
-
-                    homeEntities.add(homeEntity);
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
+                try {
 
-                data.setValue(homeEntities);
-                executor.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
+                    List<HomeEntity> homeDatas = mAppDatabase.getHomeDao().getDatas();
+
+                    if (homeDatas == null) {
+                        Response<HomeData> response = webService.getHome().execute();
+
+
+                        List<HomeData.HomeBody> bodys = response.body().getBody();
+                        for (HomeData.HomeBody homeBody : bodys) {
+                            //通过解析服务器数据的格式 然后把对象数据存到 数据库表中对应的Java对象
+                            HomeEntity homeEntity = new HomeEntity();
+
+                            homeEntity.setId(homeBody.getId());
+                            homeEntity.setPermissionName(homeBody.getPermissionName());
+                            homeEntity.setServiceType(homeBody.getServiceType());
+
+
+                            homeEntities.add(homeEntity);
                         }
 
                         mAppDatabase.getHomeDao().add(homeEntities);
                         Log.e("excutor", "数据库插入集合");
-                    }
-                });
-            }
 
-            @Override
-            public void onFailure(Call<HomeData> call, Throwable t) {
-                Log.e("body", "t =" + t);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
 
     }
 
-    private void refreshData() {
+//            @Override
+//            public void onFailure(Call<HomeData> call, Throwable t) {
+//                Log.e("body", "t =" + t);
+//
+//            }
+//        });
 
+//    }
+
+    private void refreshData() {
 
         //在线程中执行对数据库的操作   executor 也是可以开启线程
         executor.execute(new Runnable() {
@@ -143,40 +161,45 @@ public class UserRepository {
                     e.printStackTrace();
                 }
 
+                UserData data = mAppDatabase.getUserDao().getUserData();
 
-                UserParam userParam = new UserParam();
-                userParam.setAccountId("2c9180825f4d966d015f52918a39000a");
+                Log.e("excutor", "data =" + data);
 
-
-                final Response<User> response;
-                try {
-                    response = webService.getUsers(userParam).execute();
+                if (data == null) {
 
 
-                    User.Body body = response.body().getBody();
+                    UserParam userParam = new UserParam();
+                    userParam.setAccountId("2c9180825f4d966d015f52918a39000a");
 
 
-                    UserData userData = new UserData();
-                    userData.setId(body.getAccountId());
-                    userData.setAccountId(body.getAccountId());
-                    userData.setEmail(body.getEmail());
-                    userData.setHeadIcon(body.getHeadIcon());
-                    userData.setRealName(body.getRealName());
+                    final Response<User> response;
+                    try {
+                        response = webService.getUsers(userParam).execute();
 
 
-                    mAppDatabase.getUserDao().add(userData);
+                        User.Body body = response.body().getBody();
 
 
-                    Log.e("excutor", "数据库插入对象");
+                        UserData userData = new UserData();
+                        userData.setId(body.getAccountId());
+                        userData.setAccountId(body.getAccountId());
+                        userData.setEmail(body.getEmail());
+                        userData.setHeadIcon(body.getHeadIcon());
+                        userData.setRealName(body.getRealName());
 
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                        mAppDatabase.getUserDao().add(userData);
+
+
+                        Log.e("excutor", "数据库插入对象");
+
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
-
-
     }
 
 

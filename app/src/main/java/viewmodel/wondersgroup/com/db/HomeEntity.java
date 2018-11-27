@@ -16,7 +16,7 @@ public class HomeEntity {
     @PrimaryKey
     @NotNull
     private String id;
-
+    private String homeId;
     private String serviceType;
     private String permissionName;
 
@@ -42,5 +42,13 @@ public class HomeEntity {
 
     public void setPermissionName(String permissionName) {
         this.permissionName = permissionName;
+    }
+
+    public String getHomeId() {
+        return homeId;
+    }
+
+    public void setHomeId(String homeId) {
+        this.homeId = homeId;
     }
 }

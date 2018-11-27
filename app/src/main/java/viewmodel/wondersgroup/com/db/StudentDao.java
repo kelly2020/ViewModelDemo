@@ -14,15 +14,10 @@ import androidx.room.Query;
  * Version :
  */
 @Dao
-public interface HomeEntityDao {
+public interface StudentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void add(List<HomeEntity> user);
+    void add(List<Student> student);
 
-    @Query("select * from HomeEntity")
-    LiveData<List<HomeEntity>> getHomeDatas();
-
-    //查询数据库中是否已经存入数据 用来判断是否要请求网络
-    @Query("select * from HomeEntity")
-    List<HomeEntity> getDatas();
-
+    @Query("select * from Student")
+    LiveData<List<Student>> getStudents();
 }
