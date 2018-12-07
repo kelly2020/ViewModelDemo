@@ -9,7 +9,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import viewmodel.wondersgroup.com.db.HomeEntity;
 import viewmodel.wondersgroup.com.db.UserData;
+import viewmodel.wondersgroup.com.mode.ApplyRecordResultModel;
 import viewmodel.wondersgroup.com.net.UserRepository;
+import viewmodel.wondersgroup.com.netwrong.NetView;
 
 /**
  * Created by zhangwentao on 16/10/31.
@@ -28,6 +30,11 @@ public class UserProfileViewModel extends AndroidViewModel {
     public LiveData<UserData> getUsers() {
 
         return repository.getUser();
+    }
+
+    public LiveData<ApplyRecordResultModel.BodyBean> getUsersFromNet(NetView view, int startPage) {
+
+        return repository.getUserFromNet(view,startPage);
     }
 
     public LiveData<List<HomeEntity>> getHomeDatas() {

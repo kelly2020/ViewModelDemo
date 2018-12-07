@@ -3,6 +3,8 @@ package viewmodel.wondersgroup.com.net;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
+import viewmodel.wondersgroup.com.mode.ApplyRecordResultModel;
+import viewmodel.wondersgroup.com.mode.ConsumableRequestModel;
 import viewmodel.wondersgroup.com.mode.HomeData;
 import viewmodel.wondersgroup.com.mode.User;
 import viewmodel.wondersgroup.com.mode.UserParam;
@@ -21,6 +23,13 @@ public interface WebService {
     //HomeData 返回的是服务器数据格式
     @POST("qualification/getIndexPermission")
     Call<HomeData> getHome();
-
+    /**
+     * 获取个人申请记录列表
+     *
+     * @param requestModel
+     * @return
+     */
+    @POST("consumbles/apply/getApplyPageList")
+    Call<ApplyRecordResultModel> studyingTeacherGetPointList(@Body ConsumableRequestModel requestModel);
 
 }

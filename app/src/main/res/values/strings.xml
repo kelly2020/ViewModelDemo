@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ViewModelDemo</string>
+    <string name="resource_total_count">累计申领次数%d</string>
+    <string name="resource_pending_deal">待处理%d</string>
+
+
+
 </resources>

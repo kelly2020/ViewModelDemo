@@ -9,15 +9,21 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import viewmodel.wondersgroup.com.db.AppDatabase;
 import viewmodel.wondersgroup.com.db.HomeEntity;
 import viewmodel.wondersgroup.com.db.UserData;
+import viewmodel.wondersgroup.com.mode.ApplyRecordResultModel;
+import viewmodel.wondersgroup.com.mode.ConsumableRequestModel;
 import viewmodel.wondersgroup.com.mode.HomeData;
 import viewmodel.wondersgroup.com.mode.User;
 import viewmodel.wondersgroup.com.mode.UserParam;
+import viewmodel.wondersgroup.com.netwrong.NetView;
 
 /**
  * Created by zhangwentao on 16/10/31.
@@ -31,6 +37,8 @@ public class UserRepository {
 
     private static Executor executor;
     private AppDatabase mAppDatabase;
+
+    private static NetView mView;
 
     public UserRepository(AppDatabase appDatabase) {
         mAppDatabase = appDatabase;
@@ -50,12 +58,48 @@ public class UserRepository {
 
                     webService = retrofit.create(WebService.class);
                     executor = Executors.newFixedThreadPool(5);
+
                 }
             }
         }
         return mInstance;
     }
 
+    public LiveData<ApplyRecordResultModel.BodyBean> getUserFromNet(final NetView view, int startPage){
+        mView = view;
+
+        final MutableLiveData<ApplyRecordResultModel.BodyBean> liveData = new MutableLiveData<>();
+        ConsumableRequestModel requestModel = new ConsumableRequestModel();
+        requestModel.setAccountId("ff8080815fc907dd015fc909bc530000");
+        requestModel.setStart(startPage);
+        requestModel.setLength(10);
+        requestModel.setSearchTime("");
+
+        webService.studyingTeacherGetPointList(requestModel).enqueue(new Callback<ApplyRecordResultModel>() {
+            @Override
+            public void onResponse(Call<ApplyRecordResultModel> call, Response<ApplyRecordResultModel> response) {
+                if (response.isSuccessful()) {
+                    ApplyRecordResultModel recordResultModel = response.body();
+                    if (recordResultModel != null && recordResultModel.getCode() == 200) {
+                        //liveData.setValue();
+                        liveData.setValue(recordResultModel.getBody());
+
+
+                    } else {
+                        view.error(recordResultModel.getDesc());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplyRecordResultModel> call, Throwable t) {
+                view.resetRefresh();
+                view.error("服务器出错");
+            }
+        });
+        return liveData;
+
+    }
     public LiveData<UserData> getUser() {
 
         refreshData();
