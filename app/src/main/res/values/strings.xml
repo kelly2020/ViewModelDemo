@@ -2,7 +2,20 @@
     <string name="app_name">ViewModelDemo</string>
     <string name="resource_total_count">累计申领次数%d</string>
     <string name="resource_pending_deal">待处理%d</string>
+    <string name="button_click">点击按钮事件</string>
+    <string name="image_click">点击图像按钮事件</string>
+    <string name="string_text">包括富文本样式/n and </string>
 
+    <!--<string name="good_example">This\'ll work</string>-->
+    <!--<string name="good_example_2">"This'll also work"</string>-->
+    <!-- Causes a compile error -->
+
+    <string name="good_example">This is a \"good string\".</string>
+    <string name="bad_example">"This is a "bad string"."</string>
+
+    <string name="welcome1">Welcome to &lt;b>Android&lt;/b>!</string>
+    <string name="welcome_messages_normal">Hello, %1$s! You have %2$d new messages.</string>
+    <string name="welcome_messages">Hello, %1$s! You have &lt;b>%2$d new messages&lt;/b>.</string>
 
 
 </resources>

@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -41,7 +45,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/androidx.room/room-runtime
 //    implementation 'androidx.room:room-runtime:2.0.0'
-
 
     //android Room 库
     implementation 'android.arch.persistence.room:runtime:1.0.0'

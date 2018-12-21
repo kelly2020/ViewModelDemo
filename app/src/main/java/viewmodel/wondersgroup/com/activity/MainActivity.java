@@ -1,6 +1,11 @@
 package viewmodel.wondersgroup.com.activity;
 
+import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import viewmodel.wondersgroup.com.R;
 import viewmodel.wondersgroup.com.UserProfileViewModel;
 import viewmodel.wondersgroup.com.adapter.ConsumablesApplyAdapter;
@@ -32,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements NetView {
     TextView totalCountView;
     @BindView(R.id.text_view_pending_deal)
     TextView pendingDealView;
+    @BindView(R.id.imageType)
+    ImageView imageType;
+
     @BindView(R.id.recyclerview)
     RefreshRecyclerView recyclerView;
 
@@ -50,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements NetView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
 
         stringBuffer = new StringBuffer();
         viewModel = ViewModelProviders.of(this).get(UserProfileViewModel.class);
@@ -158,8 +168,6 @@ public class MainActivity extends AppCompatActivity implements NetView {
 
                     adapter.setNodifyData();
                 }
-
-
             }
         });
     }
@@ -168,6 +176,19 @@ public class MainActivity extends AppCompatActivity implements NetView {
         recyclerView.setRefreshingColorResources(android.R.color.holo_orange_light, android.R.color.holo_blue_light,
                 android.R.color.holo_green_light, android.R.color.holo_blue_dark);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        showView.setText(getResources().getInteger(R.integer.min_speed) + "");
+        int[] intArray = getResources().getIntArray(R.array.bits);
+
+
+        TypedArray typedArray = getResources().obtainTypedArray(R.array.colors);
+
+        Drawable drawable = typedArray.getDrawable(0);
+
+        int color = typedArray.getColor(0, 0);
+
+        showView.setTextColor(color);
+        imageType.setBackground(drawable);
 
     }
 
@@ -192,5 +213,28 @@ public class MainActivity extends AppCompatActivity implements NetView {
     @Override
     public void success() {
 
+    }
+
+    @OnClick({R.id.buttonType, R.id.imageType, R.id.button_animation,R.id.button_bind})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttonType:
+                Intent intent = new Intent(this, DrawableActivity.class);
+                startActivity(intent);
+                Toast.makeText(this, getResources().getString(R.string.button_click), Toast.LENGTH_LONG).show();
+                break;
+            case R.id.imageType:
+                Toast.makeText(this, getResources().getString(R.string.image_click), Toast.LENGTH_LONG).show();
+                break;
+            case R.id.button_animation:
+                Intent animationIntent = new Intent(this, AnimationActivity.class);
+                startActivity(animationIntent);
+                Toast.makeText(this, getResources().getString(R.string.image_click), Toast.LENGTH_LONG).show();
+                break;
+            case R.id.button_bind:
+                Intent bindIntent = new Intent(this, DataBindingActivity.class);
+                startActivity(bindIntent);
+                break;
+        }
     }
 }

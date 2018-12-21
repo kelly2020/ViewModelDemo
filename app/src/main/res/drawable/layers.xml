@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap android:src="@drawable/icon_message_school"
+            android:gravity="center"/>
+    </item>
+
+    <item android:top="10dp" android:left="70dp">
+        <bitmap android:src="@drawable/icon_take_photo"
+            android:gravity="center" />
+    </item>
+
+    <item android:top="50dp" android:left="50dp">
+        <bitmap android:src="@drawable/icon_message_system"
+            android:gravity="center" />
+    </item>
+
+    <item android:drawable="@drawable/health_lung_capacity"  android:gravity="bottom" android:top="60dp"/>
+</layer-list>

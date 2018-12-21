@@ -1,0 +1,6 @@
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:maxLevel="0" android:drawable="@drawable/health_jump" />
+    <item android:maxLevel="1" android:drawable="@drawable/health_lung_capacity" />
+    <item android:maxLevel="2" android:drawable="@drawable/health_run_normal" />
+    <item android:maxLevel="3" android:drawable="@drawable/health_run_quick" />
+</level-list>

@@ -1,0 +1,4 @@
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/icon_observe_close"/>
+    <item android:drawable="@drawable/icon_observe_open" />
+</transition>

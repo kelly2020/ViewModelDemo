@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@drawable/health_jump"
+        android:duration="400" />
+    <item
+        android:drawable="@drawable/health_run_quick"
+        android:duration="800" />
+    <item
+        android:drawable="@drawable/health_run_normal"
+        android:duration="400" />
+    <item
+        android:drawable="@drawable/health_lung_capacity"
+        android:duration="400" />
+
+
+</animation-list>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="colors">
+        <item>#FFFF0000</item>
+        <item>#FF00FF00</item>
+        <item>#FF0000FF</item>
+    </array>
+ <array name="drawable">
+        <item>@drawable/ic_launcher_background</item>
+        <item>@drawable/ic_launcher_foreground</item>
+        <item>@drawable/received</item>
+    </array>
+
+
+    <array name="title">
+        <item>主页</item>
+        <item>我的</item>
+        <item>服务</item>
+    </array>
+
+
+</resources>
