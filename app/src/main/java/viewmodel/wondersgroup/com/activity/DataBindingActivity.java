@@ -1,6 +1,12 @@
 package viewmodel.wondersgroup.com.activity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import viewmodel.wondersgroup.com.R;
@@ -41,6 +48,15 @@ public class DataBindingActivity extends AppCompatActivity {
         binding.setKey("key");
 
         binding.setMap(hashMap);
+
+        binding.setFlag(false);
+
+        UserBind userBind = new UserBind();
+        userBind.setHeadUrl("http://smartcampus.eduincloud.net//phone/service/material_%20filing@3x.png");
+        userBind.setState(0);
+        binding.setUser(userBind);
+
+
     }
 
     //通过使用 databing 来为recyclerview 添加显示数据
@@ -67,4 +83,31 @@ public class DataBindingActivity extends AppCompatActivity {
 
 
     }
+
+    public class MyHandlers {
+        public void onClickFriend(View view) {
+            Toast.makeText(DataBindingActivity.this, "点击事件", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @BindingAdapter("android:src")
+    public static void setSrc(ImageView view, String oldUrl) {
+
+        Glide.with(view.getContext()).load(oldUrl).into(view);
+    }
+
+    @BindingAdapter("android:background")
+    public static void setBackground(TextView view, int state) {
+
+        switch (state){
+            case 0:
+                view.setBackgroundResource(R.mipmap.ic_launcher);
+                break;
+            case 1:
+                break;
+        }
+
+    }
+
+
 }

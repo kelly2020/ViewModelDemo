@@ -9,6 +9,25 @@ public class UserBind {
     private String firstName;
     private String lastName;
     private String nullValue;
+    private String headUrl;
+    private int state;
+
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getHeadUrl() {
+        return headUrl;
+    }
+
+    public void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
 
     public String getNullValue() {
         return nullValue;

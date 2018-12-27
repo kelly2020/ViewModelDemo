@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <data>
+
+        <variable
+            name="handler"
+            type="viewmodel.wondersgroup.com.activity.DataBindingActivity.MyHandlers" />
 
         <import type="java.util.List" />
 
         <import type="java.util.Map" />
 
-        <import type="viewmodel.wondersgroup.com.mode.UserBind" />
+        <variable
+            name="list"
+            type="List&lt;String>" />
 
-        <variable name="list" type="List&lt;String>" />
+        <variable
+            name="map"
+            type="Map&lt;String,String>" />
 
-        <variable name="map" type="Map&lt;String,String>" />
+        <variable
+            name="index"
+            type="int" />
 
-        <variable name="index" type="int" />
+        <variable
+            name="key"
+            type="String" />
 
-        <variable name="key" type="String" />
+        <variable
+            name="flag"
+            type="boolean" />
 
-        <variable name="user" type="UserBind" />
+        <variable
+            name="user"
+            type="viewmodel.wondersgroup.com.mode.UserBind"/>
 
 
     </data>
@@ -30,27 +48,46 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{user.firstName ?? user.nullValue}" />
+            android:onClick="@{handler::onClickFriend}"
+            android:text="@{list[index]}"
+            android:textSize="@{flag?(int)@dimen/font_size: (int)@dimen/ball_radius}" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{user.lastName}" />
+            android:text="@{map[key]}"
+            android:textSize="@dimen/ball_radius" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{list[index]}" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{map[key]}" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@{user.headUrl}" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{}"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@{user.state}"/>
+
+        </LinearLayout>
+
+
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>
