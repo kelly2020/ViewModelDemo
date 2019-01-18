@@ -1,5 +1,6 @@
 package viewmodel.wondersgroup.com.activity;
 
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,11 +16,13 @@ import java.util.Map;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.BindingConversion;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import viewmodel.wondersgroup.com.R;
 import viewmodel.wondersgroup.com.adapter.DataBindingAdapter;
 import viewmodel.wondersgroup.com.databinding.ActivityDataBindingBinding;
+import viewmodel.wondersgroup.com.mode.ObserveFieldUser;
 import viewmodel.wondersgroup.com.mode.UserBind;
 //import androidx.databinding.DataBindingUtil;
 
@@ -29,6 +32,9 @@ public class DataBindingActivity extends AppCompatActivity {
 
     private DataBindingAdapter adapter;
     private ActivityDataBindingBinding binding;
+
+    private UserBind userBind;
+    private ObserveFieldUser observeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +57,24 @@ public class DataBindingActivity extends AppCompatActivity {
 
         binding.setFlag(false);
 
-        UserBind userBind = new UserBind();
+        userBind = new UserBind();
         userBind.setHeadUrl("http://smartcampus.eduincloud.net//phone/service/material_%20filing@3x.png");
         userBind.setState(0);
+        userBind.setFirstName("张三");
         binding.setUser(userBind);
 
+        //添加绑定事件
+        binding.setHandler(new MyHandlers());
+
+
+        observeUser = new ObserveFieldUser();
+        observeUser.age.set(10);
+        observeUser.firstName.set("ObserveFile 添加的值");
+        observeUser.lastName.set("轩轩");
+
+        binding.setObserveUser(observeUser);
+
+        binding.setStringUtil(new MyStringUtils());
 
     }
 
@@ -86,7 +105,15 @@ public class DataBindingActivity extends AppCompatActivity {
 
     public class MyHandlers {
         public void onClickFriend(View view) {
-            Toast.makeText(DataBindingActivity.this, "点击事件", Toast.LENGTH_LONG).show();
+            Toast.makeText(DataBindingActivity.this, "修改值", Toast.LENGTH_LONG).show();
+            userBind.setFirstName("爱新觉罗");
+        }
+
+        public void onClickAge(View view) {
+            Toast.makeText(DataBindingActivity.this, "修改年龄", Toast.LENGTH_LONG).show();
+            observeUser.age.set(20);
+
+
         }
     }
 
@@ -99,7 +126,7 @@ public class DataBindingActivity extends AppCompatActivity {
     @BindingAdapter("android:background")
     public static void setBackground(TextView view, int state) {
 
-        switch (state){
+        switch (state) {
             case 0:
                 view.setBackgroundResource(R.mipmap.ic_launcher);
                 break;
@@ -108,6 +135,22 @@ public class DataBindingActivity extends AppCompatActivity {
         }
 
     }
+//
+// @BindingAdapter("android:background")
+//    public static void setTextBackground(TextView view, int age) {
+//        view.setText("age=" + age);
+//    }
 
+    public class MyStringUtils {
+        public String getStringFromInt(int value) {
+            return String.valueOf(value);
+        }
+    }
+
+    //sh
+    @BindingConversion
+    public static ColorDrawable convertColorToDrawable(int color) {
+        return new ColorDrawable(color);
+    }
 
 }

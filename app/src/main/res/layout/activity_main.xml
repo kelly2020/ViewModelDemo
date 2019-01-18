@@ -20,11 +20,19 @@
         android:layout_height="wrap_content"
         android:text="animation"
         android:textColor="@color/button_text" />
- <Button
+
+    <Button
         android:id="@+id/button_bind"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="binding"
+        android:textColor="@color/button_text" />
+
+    <Button
+        android:id="@+id/view_stub_bind"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="viewStub"
         android:textColor="@color/button_text" />
 
     <ImageView

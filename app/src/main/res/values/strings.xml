@@ -17,5 +17,5 @@
     <string name="welcome_messages_normal">Hello, %1$s! You have %2$d new messages.</string>
     <string name="welcome_messages">Hello, %1$s! You have &lt;b>%2$d new messages&lt;/b>.</string>
 
-
+    <string name="age">%$d ages</string>
 </resources>

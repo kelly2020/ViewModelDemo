@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:bind="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="viewmodel.wondersgroup.com.util.MyStringUtil" />
 
         <variable
             name="handler"
@@ -35,8 +37,15 @@
 
         <variable
             name="user"
-            type="viewmodel.wondersgroup.com.mode.UserBind"/>
+            type="viewmodel.wondersgroup.com.mode.UserBind" />
 
+        <variable
+            name="observeUser"
+            type="viewmodel.wondersgroup.com.mode.ObserveFieldUser" />
+
+        <variable
+            name="stringUtil"
+            type="viewmodel.wondersgroup.com.activity.DataBindingActivity.MyStringUtils" />
 
     </data>
 
@@ -72,17 +81,50 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{}"/>
+                android:onClick="@{handler.onClickFriend}"
+                android:text="点击事件" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@{user.state}"/>
+                android:background="@{user.state}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.firstName}" />
+
 
         </LinearLayout>
 
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{handler.onClickAge}"
+            android:text="修改年龄值" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{observeUser.firstName}" />
+
+
+        <!--下面两种方式都可以-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@{MyStringUtil.getStringFromInt(observeUser.age)}" />-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{stringUtil.getStringFromInt(observeUser.age)}" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="@{@color/red}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"

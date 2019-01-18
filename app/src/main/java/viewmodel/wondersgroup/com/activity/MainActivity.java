@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements NetView {
                 pendingDealView.setText(String.format(getResources().getString(R.string.resource_pending_deal), count));
                 List<ApplyRecordResultModel.BodyBean.ApplyRecordsBean> applyRecords = user.getApplyRecords();
 
+
                 if (mDatas != null) {
 
                     if (startPage == 1) {
@@ -215,7 +216,7 @@ public class MainActivity extends AppCompatActivity implements NetView {
 
     }
 
-    @OnClick({R.id.buttonType, R.id.imageType, R.id.button_animation,R.id.button_bind})
+    @OnClick({R.id.buttonType, R.id.imageType, R.id.button_animation,R.id.button_bind,R.id.view_stub_bind})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonType:
@@ -234,6 +235,10 @@ public class MainActivity extends AppCompatActivity implements NetView {
             case R.id.button_bind:
                 Intent bindIntent = new Intent(this, DataBindingActivity.class);
                 startActivity(bindIntent);
+                break;
+            case R.id.view_stub_bind:
+                Intent viewStubIntent = new Intent(this, ViewStubActivity.class);
+                startActivity(viewStubIntent);
                 break;
         }
     }

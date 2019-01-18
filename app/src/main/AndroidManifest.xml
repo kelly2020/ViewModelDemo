@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".activity.DrawableActivity" />
         <activity android:name=".activity.AnimationActivity" />
-        <activity android:name=".activity.DataBindingActivity"></activity>
+        <activity android:name=".activity.DataBindingActivity" />
+        <activity android:name=".activity.ViewStubActivity"></activity>
     </application>
 
 </manifest>
