@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 import viewmodel.wondersgroup.com.R;
+import viewmodel.wondersgroup.com.databinding.ItemBindLayoutBinding;
 import viewmodel.wondersgroup.com.mode.UserBind;
 
 /**
@@ -28,12 +29,21 @@ public class DataBindingAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new DataBindingHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_data_binding, parent, false));
+
+        ItemBindLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_bind_layout, parent, false);
+
+        return new DataBindingHolder(binding.getRoot());
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof  DataBindingHolder){
+            DataBindingHolder viewHolder = (DataBindingHolder) holder;
+            ItemBindLayoutBinding bind = DataBindingUtil.bind(viewHolder.itemView);
 
+            bind.setUser(new UserBind());
+            bind.executePendingBindings();
+        }
     }
 
     @Override
@@ -46,12 +56,7 @@ public class DataBindingAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public DataBindingHolder(@NonNull View itemView) {
             super(itemView);
-               DataBindingUtil.bind(itemView);
         }
 
-        public void bind(UserBind userBind){
-
-
-        }
     }
 }

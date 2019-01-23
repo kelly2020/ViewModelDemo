@@ -113,7 +113,10 @@ public class DataBindingActivity extends AppCompatActivity {
             Toast.makeText(DataBindingActivity.this, "修改年龄", Toast.LENGTH_LONG).show();
             observeUser.age.set(20);
 
+        }
 
+        public void onSaveClick(View view, UserBind user){
+            Toast.makeText(DataBindingActivity.this, "user.name=" + user.getFirstName(), Toast.LENGTH_LONG).show();
         }
     }
 
