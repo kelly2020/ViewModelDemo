@@ -27,6 +27,7 @@ import viewmodel.wondersgroup.com.UserProfileViewModel;
 import viewmodel.wondersgroup.com.adapter.ConsumablesApplyAdapter;
 import viewmodel.wondersgroup.com.mode.ApplyRecordResultModel;
 import viewmodel.wondersgroup.com.netwrong.NetView;
+import viewmodel.wondersgroup.com.service.MyService;
 import viewmodel.wondersgroup.com.view.RefreshRecyclerView;
 
 public class MainActivity extends AppCompatActivity implements NetView {
@@ -216,7 +217,8 @@ public class MainActivity extends AppCompatActivity implements NetView {
 
     }
 
-    @OnClick({R.id.buttonType, R.id.imageType, R.id.button_animation,R.id.button_bind,R.id.view_stub_bind})
+    @OnClick({R.id.buttonType, R.id.imageType, R.id.button_animation,R.id.button_bind,R.id.view_stub_bind
+            ,R.id.view_car_bind,R.id.bind_btn_update})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonType:
@@ -239,6 +241,17 @@ public class MainActivity extends AppCompatActivity implements NetView {
             case R.id.view_stub_bind:
                 Intent viewStubIntent = new Intent(this, ViewStubActivity.class);
                 startActivity(viewStubIntent);
+                break;
+
+            case R.id.view_car_bind:
+                //开启一个服务并且把它转化为前台服务 案例是通知栏显示
+                startService(new Intent(this,MyService.class));
+
+                break;
+            case R.id.bind_btn_update:
+                //数据绑定优化
+                startActivity(new Intent(this,DataBindingUpdateActivity.class));
+
                 break;
         }
     }

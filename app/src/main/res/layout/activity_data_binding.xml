@@ -98,11 +98,11 @@
         </LinearLayout>
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> handler.onSaveClick(user)}"
-            android:text="显示姓名" />
+        <!--<Button-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:onClick="@{()-> handler.onSaveClick()}"-->
+            <!--android:text="显示姓名" />-->
 
         <Button
             android:layout_width="wrap_content"

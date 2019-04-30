@@ -20,17 +20,16 @@ import androidx.databinding.BindingConversion;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import viewmodel.wondersgroup.com.R;
-import viewmodel.wondersgroup.com.adapter.DataBindingAdapter;
+import viewmodel.wondersgroup.com.adapter.DataBindingAdapter2;
 import viewmodel.wondersgroup.com.databinding.ActivityDataBindingBinding;
 import viewmodel.wondersgroup.com.mode.ObserveFieldUser;
 import viewmodel.wondersgroup.com.mode.UserBind;
-//import androidx.databinding.DataBindingUtil;
 
 public class DataBindingActivity extends AppCompatActivity {
 
     Map<String, String> hashMap;
 
-    private DataBindingAdapter adapter;
+    private DataBindingAdapter2 adapter;
     private ActivityDataBindingBinding binding;
 
     private UserBind userBind;
@@ -66,7 +65,7 @@ public class DataBindingActivity extends AppCompatActivity {
         //添加绑定事件
         binding.setHandler(new MyHandlers());
 
-
+    //适合较少字段
         observeUser = new ObserveFieldUser();
         observeUser.age.set(10);
         observeUser.firstName.set("ObserveFile 添加的值");
@@ -96,19 +95,22 @@ public class DataBindingActivity extends AppCompatActivity {
         userBinds.add(userBind2);
 
         binding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new DataBindingAdapter(userBinds);
+        adapter = new DataBindingAdapter2(userBinds);
 
         binding.recyclerview.setAdapter(adapter);
 
 
     }
 
+    /**
+     * 绑定点击事件  下面两种方式都可以添加点击事件  @{handler.onClickAge}   @{handler::onClickFriend}
+     */
     public class MyHandlers {
         public void onClickFriend(View view) {
             Toast.makeText(DataBindingActivity.this, "修改值", Toast.LENGTH_LONG).show();
             userBind.setFirstName("爱新觉罗");
         }
-
+//
         public void onClickAge(View view) {
             Toast.makeText(DataBindingActivity.this, "修改年龄", Toast.LENGTH_LONG).show();
             observeUser.age.set(20);
@@ -117,6 +119,9 @@ public class DataBindingActivity extends AppCompatActivity {
 
         public void onSaveClick(View view, UserBind user){
             Toast.makeText(DataBindingActivity.this, "user.name=" + user.getFirstName(), Toast.LENGTH_LONG).show();
+        }
+        public void onSaveClick(View view){
+            Toast.makeText(DataBindingActivity.this, "user.name=" + "123", Toast.LENGTH_LONG).show();
         }
     }
 

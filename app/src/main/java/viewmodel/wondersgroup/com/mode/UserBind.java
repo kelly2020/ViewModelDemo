@@ -6,7 +6,7 @@ import viewmodel.wondersgroup.com.BR;
 
 /**
  * Created by zhangwentao on 16/10/31.
- * Description :
+ * Description : 效率比较高虽然书写麻烦
  * Version :
  */
 public class UserBind extends BaseObservable {

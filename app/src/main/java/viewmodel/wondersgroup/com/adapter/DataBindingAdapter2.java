@@ -30,6 +30,10 @@ public class DataBindingAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+//        ListItemBinding binding = ListItemBinding.inflate(layoutInflater, viewGroup, false);
+// or
+//        ListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item, viewGroup, false);
+
         ItemBindLayoutBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_bind_layout, parent, false);
 
         return new DataBindingHolder(binding.getRoot());
@@ -38,8 +42,10 @@ public class DataBindingAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof  DataBindingHolder){
-            DataBindingHolder viewHolder = (DataBindingHolder) holder;
-            ItemBindLayoutBinding bind = DataBindingUtil.bind(viewHolder.itemView);
+//            DataBindingHolder viewHolder = (DataBindingHolder) holder;
+            //下面两种方式都可以获取bind
+//            ItemBindLayoutBinding bind = DataBindingUtil.bind(viewHolder.itemView);
+            ItemBindLayoutBinding bind = DataBindingUtil.getBinding(holder.itemView);
 
             bind.setUser(new UserBind());
             bind.executePendingBindings();
