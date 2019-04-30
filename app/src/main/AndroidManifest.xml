@@ -34,7 +34,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".activity.DataBindingUpdateActivity"></activity>
+        <activity android:name=".activity.DataBindingUpdateActivity" />
+        <activity android:name=".activity.ObservableActivity"></activity>
     </application>
 
 </manifest>

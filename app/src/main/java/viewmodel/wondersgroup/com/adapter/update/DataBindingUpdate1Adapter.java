@@ -27,5 +27,13 @@ public class DataBindingUpdate1Adapter extends BaseBindingAdapter<UserUpdate,Ite
     protected void onBindItem(ItemUpdateBindViewBinding binding, UserUpdate item) {
         binding.setUser(item);
         binding.executePendingBindings();
+
+        if (item.isCheck()){
+            binding.checkbox.setChecked(true);
+        } else {
+            binding.checkbox.setChecked(false);
+        }
+
+
     }
 }

@@ -64,7 +64,7 @@ public abstract class BaseBindingAdapter<M, B extends ViewDataBinding> extends R
              holder.itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     mItemClickListener.onItemClick(items.get(position));
+                     mItemClickListener.onItemClick(items.get(position),position);
                  }
              });
          }
@@ -150,6 +150,7 @@ public abstract class BaseBindingAdapter<M, B extends ViewDataBinding> extends R
         @Override
         public void onItemRangeMoved(ObservableArrayList<M> newItems, int fromPosition, int toPosition, int itemCount) {
             BaseBindingAdapter.this.onItemRangeMoved(newItems);
+
         }
 
         @Override
@@ -169,6 +170,6 @@ public abstract class BaseBindingAdapter<M, B extends ViewDataBinding> extends R
 
     public interface OnItemClickListener<M>
     {
-        void onItemClick(M item);
+        void onItemClick(M item,int positon);
     }
 }

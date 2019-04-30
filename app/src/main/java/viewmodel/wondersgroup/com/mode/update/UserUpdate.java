@@ -9,6 +9,7 @@ package viewmodel.wondersgroup.com.mode.update;
 public class UserUpdate {
     private String name;
     private int age;
+    private boolean isCheck;
 
     public String getName() {
         return name;
@@ -24,5 +25,13 @@ public class UserUpdate {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
     }
 }
