@@ -69,6 +69,12 @@
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:text="bind高级用法"/>
+        <Button
+            android:id="@+id/bind_btn_zhu_jie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="bind注解适应"/>
     </LinearLayout>
 
 
