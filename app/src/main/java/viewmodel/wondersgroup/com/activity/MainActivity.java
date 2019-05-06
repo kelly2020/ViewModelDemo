@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements NetView {
     }
 
     @OnClick({R.id.buttonType, R.id.imageType, R.id.button_animation,R.id.button_bind,R.id.view_stub_bind
-            ,R.id.view_car_bind,R.id.bind_btn_update,R.id.bind_btn_zhu_jie})
+            ,R.id.view_car_bind,R.id.bind_btn_update,R.id.bind_btn_zhu_jie,R.id.bind_btn_lifecycle})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.buttonType:
@@ -257,6 +257,11 @@ public class MainActivity extends AppCompatActivity implements NetView {
             case R.id.bind_btn_zhu_jie:
                 //数据绑定注解
                 startActivity(new Intent(this,ZhuJieActivity.class));
+
+                break;
+            case R.id.bind_btn_lifecycle:
+                //数据绑定注解
+                startActivity(new Intent(this,LifecyclesActivity.class));
 
                 break;
 

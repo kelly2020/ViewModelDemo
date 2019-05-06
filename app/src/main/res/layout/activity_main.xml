@@ -75,6 +75,12 @@
             android:layout_height="wrap_content"
             android:textAllCaps="false"
             android:text="bind注解适应"/>
+        <Button
+            android:id="@+id/bind_btn_lifecycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:text="lifecycle"/>
     </LinearLayout>
 
 

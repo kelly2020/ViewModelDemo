@@ -11,9 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +37,8 @@
 
         <activity android:name=".activity.DataBindingUpdateActivity" />
         <activity android:name=".activity.ObservableActivity" />
-        <activity android:name=".activity.ZhuJieActivity"></activity>
+        <activity android:name=".activity.ZhuJieActivity" />
+        <activity android:name=".activity.LifecyclesActivity"></activity>
     </application>
 
 </manifest>
